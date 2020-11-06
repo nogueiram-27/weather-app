@@ -1,0 +1,100 @@
+button {
+  background: none;
+  border: 0;
+}
+
+hr {
+  border: 0;
+  border-top: 3px solid rgba(3, 196, 161);
+}
+
+input {
+  border: 2px solid #03c4a1;
+  border-radius: 2px;
+}
+
+input:focus {
+  border: 3px solid #03c4a1;
+  border-radius: 2px;
+}
+
+.container {
+  margin: 20px auto;
+}
+
+.weather-app {
+  border: 2px solid #03c4a1;
+  padding: 30px;
+  margin: 0 auto;
+  border-radius: 10px;
+  max-width: 650px;
+}
+
+.weather-unit {
+  color: #03c4a1;
+  font-family: "Open Sans", sans-serif;
+}
+
+.convert-unit {
+  text-decoration: none;
+  color: #03c4a1;
+  font-family: "Open Sans", sans-serif;
+}
+
+.fa-search {
+  color: #03c4a1;
+}
+
+.fa-map-marker-alt {
+  color: #03c4a1;
+}
+
+.curr-city-weather {
+  color: #03c4a1;
+  font-family: "Open Sans", sans-serif;
+  font-size: 20px;
+}
+
+.today {
+  color: #03c4a1;
+  font-family: "Open Sans", sans-serif;
+  font-size: 12px;
+}
+
+.curr-info {
+  color: #03c4a1;
+  font-family: "Open Sans", sans-serif;
+}
+
+.fa-sun {
+  font-size: 150px;
+  color: #03c4a1;
+}
+
+.pred-weather-icon {
+  color: #03c4a1;
+}
+
+.day-week {
+  color: #03c4a1;
+  font-family: "Open Sans", sans-serif;
+}
+
+.pred-temp {
+  color: #03c4a1;
+  font-family: "Open Sans", sans-serif;
+  font-size: 12px;
+  text-align: left;
+}
+
+.selected {
+  text-decoration: none;
+  color: #03c4a1;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+}
+
+.curr-temp-main {
+  font-size: 26px;
+  font-weight: bold;
+}

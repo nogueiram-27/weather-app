@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+
+    <link rel="stylesheet" href="src/weather-app.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/808e70c11d.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="weather-app">
+        <div class="app-header">
+          <div class="row">
+            <div class="blank-col col-1"></div>
+            <div class="col-8">
+              <form class="search-form" id="search-city-weather">
+                <input
+                  type="text"
+                  placeholder="Enter city name"
+                  id="input-city"
+                />
+                <button type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+                <button class="location-button" id="curr-location">
+                  <i class="fas fa-map-marker-alt"></i>
+                </button>
+              </form>
+            </div>
+            <div class="col-3">
+              <p class="weather-unit">
+                <a class="convert-unit selected" href="#" id="convert-celsius"
+                  >ºC</a
+                >|<a class="convert-unit" href="#" id="convert-fahrenheit"
+                  >ºF</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+        <br /><br />
+
+        <div class="current-weather">
+          <div class="row">
+            <div class="blank-col col-1"></div>
+            <div class="col-5">
+              <h3 class="curr-city-weather">
+                <span class="city-searched">LISBON &nbsp; </span>
+                <span class="curr-temp-main"
+                  ><span id="curr-temp">23</span
+                  ><span id="curr-temp-unit">ºC</span></span
+                >
+              </h3>
+              <p class="today">Sunday, 10:16</p>
+              <p class="curr-info">
+                <span id="curr-temp-min">21</span>º/<span id="curr-temp-max"
+                  >25</span
+                >º
+              </p>
+              <p class="curr-info">
+                <i class="fas fa-tint"></i> <span id="curr-humidity">5</span>%
+              </p>
+              <p class="curr-info">
+                <i class="fas fa-wind"></i>
+                <span id="curr-wind-speed">2</span> km/h
+              </p>
+            </div>
+            <div class="col-6 align-self-center">
+              <i class="far fa-sun"></i>
+            </div>
+          </div>
+        </div>
+        <br />
+
+        <div class="row">
+          <div class="blank-col col-1"></div>
+          <div class="line-col col-10">
+            <hr />
+          </div>
+        </div>
+
+        <div class="next-days">
+          <div class="row">
+            <div class="blank-col col-1"></div>
+            <div class="col-2">
+              <i class="fas fa-cloud-sun pred-weather-icon"></i>
+              <br />
+              <p class="day-week">MON</p>
+              <p class="pred-temp">
+                <span class="temp-min">22</span>º/<span class="temp-max"
+                  >24</span
+                >º
+              </p>
+            </div>
+            <div class="col-2">
+              <i class="fas fa-cloud-sun pred-weather-icon"></i>
+              <br />
+              <p class="day-week">TUE</p>
+              <p class="pred-temp">
+                <span class="temp-min">21</span>º/<span class="temp-max"
+                  >24</span
+                >º
+              </p>
+            </div>
+            <div class="col-2">
+              <i class="fas fa-cloud pred-weather-icon"></i>
+              <br />
+              <p class="day-week">WED</p>
+              <p class="pred-temp">
+                <span class="temp-min">20</span>º/<span class="temp-max"
+                  >22</span
+                >º
+              </p>
+            </div>
+            <div class="col-2">
+              <i class="fas fa-cloud pred-weather-icon"></i>
+              <br />
+              <p class="day-week">THU</p>
+              <p class="pred-temp">
+                <span class="temp-min">19</span>º/<span class="temp-max"
+                  >21</span
+                >º
+              </p>
+            </div>
+            <div class="col-2">
+              <i class="fas fa-cloud-rain pred-weather-icon"></i>
+              <br />
+              <p class="day-week">FRI</p>
+              <p class="pred-temp">
+                <span class="temp-min">18</span>º/<span class="temp-max"
+                  >20</span
+                >º
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="src/weather-app.js"></script>
+  </body>
+</html>
