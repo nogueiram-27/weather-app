@@ -1,3 +1,8 @@
+body {
+  color: #03c4a1;
+  font-family: "Open Sans", sans-serif;
+}
+
 button {
   background: none;
   border: 0;
@@ -5,17 +10,13 @@ button {
 
 hr {
   border: 0;
-  border-top: 3px solid rgba(3, 196, 161);
+  border-top: 2px solid rgba(3, 196, 161);
 }
 
-input {
-  border: 2px solid #03c4a1;
-  border-radius: 2px;
-}
-
-input:focus {
-  border: 3px solid #03c4a1;
-  border-radius: 2px;
+.form-control {
+  display: inline;
+  width: 60%;
+  border: 1px solid #03c4a1;
 }
 
 .container {
@@ -30,15 +31,21 @@ input:focus {
   max-width: 650px;
 }
 
+.app-header {
+  margin-bottom: 30px;
+}
+
 .weather-unit {
-  color: #03c4a1;
-  font-family: "Open Sans", sans-serif;
+  margin-top: 6px;
 }
 
 .convert-unit {
   text-decoration: none;
   color: #03c4a1;
-  font-family: "Open Sans", sans-serif;
+}
+
+.convert-unit:hover {
+  color: #009688;
 }
 
 .fa-search {
@@ -50,20 +57,11 @@ input:focus {
 }
 
 .curr-city-weather {
-  color: #03c4a1;
-  font-family: "Open Sans", sans-serif;
   font-size: 20px;
 }
 
 .today {
-  color: #03c4a1;
-  font-family: "Open Sans", sans-serif;
   font-size: 12px;
-}
-
-.curr-info {
-  color: #03c4a1;
-  font-family: "Open Sans", sans-serif;
 }
 
 .fa-sun {
@@ -75,23 +73,22 @@ input:focus {
   color: #03c4a1;
 }
 
-.day-week {
-  color: #03c4a1;
-  font-family: "Open Sans", sans-serif;
-}
-
 .pred-temp {
-  color: #03c4a1;
-  font-family: "Open Sans", sans-serif;
   font-size: 12px;
   text-align: left;
 }
 
 .selected {
   text-decoration: none;
-  color: #03c4a1;
-  font-family: "Open Sans", sans-serif;
   font-weight: bold;
+  color: #009688;
+  cursor: default;
+}
+
+.selected:hover {
+  text-decoration: none;
+  font-weight: bold;
+  color: #009688;
 }
 
 .curr-temp-main {
@@ -103,8 +100,40 @@ input:focus {
   padding-top: 10px;
   margin: 0 auto;
   max-width: 650px;
-  font-family: "Open Sans", sans-serif;
   font-size: 11px;
   font-weight: lighter;
   color: grey;
+}
+
+.location-button .tooltiptext {
+  visibility: hidden;
+  width: 115px;
+  background-color: grey;
+  opacity: 50%;
+  font-size: 10px;
+  font-family: "Open Sans", sans-serif;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: 92%;
+  left: 52%;
+  margin-left: 22px;
+}
+
+.location-button .tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent grey transparent;
+}
+
+.location-button:hover .tooltiptext {
+  visibility: visible;
 }

@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
 
-    <link rel="stylesheet" href="src/weather-app.css" />
-
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -23,6 +21,8 @@
       rel="stylesheet"
     />
 
+    <link rel="stylesheet" href="src/weather-app.css" />
+
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
 
@@ -37,13 +37,16 @@
                 <input
                   type="text"
                   placeholder="Enter city name"
+                  class="form-control"
                   id="input-city"
+                  autocomplete="off"
                 />
                 <button type="submit">
                   <i class="fas fa-search"></i>
                 </button>
                 <button class="location-button" id="curr-location">
                   <i class="fas fa-map-marker-alt"></i>
+                  <span class="tooltiptext"> Weather in current location </span>
                 </button>
               </form>
             </div>
@@ -58,31 +61,31 @@
             </div>
           </div>
         </div>
-        <br /><br />
 
         <div class="current-weather">
           <div class="row">
             <div class="blank-col col-1"></div>
             <div class="col-5">
               <h3 class="curr-city-weather">
-                <span class="city-searched">LISBON &nbsp; </span>
+                <span class="city-searched"> &nbsp; </span>
                 <span class="curr-temp-main"
-                  ><span id="curr-temp">23</span
+                  ><span id="curr-temp"></span
                   ><span id="curr-temp-unit">ºC</span></span
                 >
               </h3>
-              <p class="today">Sunday, 10:16</p>
+              <p class="today"></p>
               <p class="curr-info">
-                <span id="curr-temp-min">21</span>º/<span id="curr-temp-max"
-                  >25</span
+                <span id="curr-temp-min"></span>º/<span
+                  id="curr-temp-max"
+                ></span
                 >º
               </p>
               <p class="curr-info">
-                <i class="fas fa-tint"></i> <span id="curr-humidity">5</span>%
+                <i class="fas fa-tint"></i> <span id="curr-humidity"></span>%
               </p>
               <p class="curr-info">
                 <i class="fas fa-wind"></i>
-                <span id="curr-wind-speed">2</span> km/h
+                <span id="curr-wind-speed"></span> km/h
               </p>
             </div>
             <div class="col-6 align-self-center">
