@@ -19,14 +19,19 @@ function setCurrentDate() {
   let appDate = document.querySelector("p.today");
   appDate.innerHTML = `${currentDay}, ${currentHour}:${currentMinutes}`;
 }
-function updateCityWeatherInfo(
-  cityName,
-  currentTemp,
-  currentMaxTemp,
-  curentMinTemp,
-  currentWind,
-  currentHumidity
-) {
+
+function updateCityWeatherInfo(response) {
+  // get response weather data
+  let cityName = response.data.name;
+  let currentTemp = Math.round(response.data.main.temp);
+  let currentMaxTemp = Math.round(response.data.main.temp_max);
+  let curentMinTemp = Math.round(response.data.main.temp_min);
+  let currentWind = response.data.wind.speed;
+  let currentHumidity = response.data.main.humidity;
+  let currentIcon = response.data.weather[0].icon;
+  let currentDescription = response.data.weather[0].description;
+
+  // update current weather info
   let appCity = document.querySelector(".city-searched");
   appCity.innerHTML = cityName.toUpperCase() + "   ";
 
@@ -44,37 +49,55 @@ function updateCityWeatherInfo(
 
   let appCurrHumidity = document.querySelector("#curr-humidity");
   appCurrHumidity.innerHTML = currentHumidity + " ";
+
+  let appCurrIcon = document.querySelector("#curr-weather-icon");
+  appCurrIcon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${currentIcon}@2x.png`
+  );
+
+  appCurrIcon.setAttribute("alt", currentDescription);
 }
 
-function getCityWeatherData(response) {
-  console.log(response.data);
-  let cityName = response.data.name;
-  let currentTemp = Math.round(response.data.main.temp);
-  let currentMaxTemp = Math.round(response.data.main.temp_max);
-  let curentMinTemp = Math.round(response.data.main.temp_min);
-  let currentWind = response.data.wind.speed;
-  let currentHumidity = response.data.main.humidity;
+function updateForecastInfo(response) {
+  let appForecast = document.querySelector("#forecast");
+  appForecast.innerHTML = null;
 
-  updateCityWeatherInfo(
-    cityName,
-    currentTemp,
-    currentMaxTemp,
-    curentMinTemp,
-    currentWind,
-    currentHumidity
-  );
+  for (let i = 0; i < 6; i++) {
+    forecast = response.data.list[i];
+    appForecast.innerHTML += `
+      <div class="col-2">
+        <p class="next-hour">${forecast.dt * 1000}</p>
+        <img 
+          class="pred-icon"
+          src="http://openweathermap.org/img/wn/${
+            forecast.weather[0].icon
+          }@2x.png" 
+        />
+        <p class="pred-temp">
+          <span class="temp-min">
+            ${Math.round(forecast.main.temp_min)}
+          </span>º/
+          <span class="temp-max">
+            ${Math.round(forecast.main.temp_max)}
+          </span>º
+        </p>
+      </div>
+  `;
+  }
 }
 
 function getCityWeatherInfoByGeoLocation(lat, lon, tempUnit) {
   let weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${tempUnit}&appid=${apiKey}`;
   console.log(weatherApiUrl);
-  axios.get(weatherApiUrl).then(getCityWeatherData);
+  axios.get(weatherApiUrl).then(updateCityWeatherInfo);
 }
 
 function getCityWeatherInfoByCityName(cityName, tempUnit) {
   let weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=${tempUnit}&appid=${apiKey}`;
-  console.log(weatherApiUrl);
-  axios.get(weatherApiUrl).then(getCityWeatherData);
+  let predWeatherApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=${tempUnit}&appid=${apiKey}`;
+  axios.get(weatherApiUrl).then(updateCityWeatherInfo);
+  axios.get(predWeatherApiUrl).then(updateForecastInfo);
 }
 
 function setCityWeatherInfo(event) {

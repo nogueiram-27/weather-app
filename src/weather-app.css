@@ -13,12 +13,6 @@ hr {
   border-top: 2px solid rgba(3, 196, 161);
 }
 
-.form-control {
-  display: inline;
-  width: 60%;
-  border: 1px solid #03c4a1;
-}
-
 .container {
   margin: 20px auto;
 }
@@ -33,6 +27,12 @@ hr {
 
 .app-header {
   margin-bottom: 30px;
+}
+
+.form-control {
+  display: inline;
+  width: 60%;
+  border: 1px solid #03c4a1;
 }
 
 .weather-unit {
@@ -62,15 +62,6 @@ hr {
 
 .today {
   font-size: 12px;
-}
-
-.fa-sun {
-  font-size: 150px;
-  color: #03c4a1;
-}
-
-.pred-weather-icon {
-  color: #03c4a1;
 }
 
 .pred-temp {
