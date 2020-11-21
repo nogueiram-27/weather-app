@@ -159,6 +159,10 @@ function cleanInputCity() {
   inputCity.value = "";
 }
 
+function setWeatherAdvice(response) {
+  let currWeatherIcon = response.data.weather[0].icon;
+}
+
 function getCityWeatherInfoByGeoLocation(lat, lon, tempUnit) {
   let weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${tempUnit}&appid=${apiKey}`;
   let predWeatherApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${tempUnit}&appid=${apiKey}`;
