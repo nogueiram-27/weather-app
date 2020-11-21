@@ -1,23 +1,48 @@
 let apiKey = "db8ccdf98a00dd96ce6fde5b428abba4";
 
+let days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+
 function setCurrentDate() {
   let currentDate = new Date();
-  let days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-
   let currentDay = days[currentDate.getDay()];
   let currentHour = currentDate.getHours();
+  if (currentHour < 10) {
+    currentHour = `0${currentHour}`;
+  }
   let currentMinutes = currentDate.getMinutes();
+  if (currentMinutes < 10) {
+    currentMinutes = `0${currentMinutes}`;
+  }
 
   let appDate = document.querySelector("p.today");
   appDate.innerHTML = `${currentDay}, ${currentHour}:${currentMinutes}`;
+}
+
+function convertEpochToDateTime(epochTime, returnComplete) {
+  let dateTime = new Date(epochTime);
+  let dateTimeDay = days[dateTime.getDay()];
+  let dateTimeHour = dateTime.getHours();
+  if (dateTimeHour < 10) {
+    dateTimeHour = `0${dateTimeHour}`;
+  }
+  let dateTimeMinutes = dateTime.getMinutes();
+  if (dateTimeMinutes < 10) {
+    dateTimeMinutes = `0${dateTimeMinutes}`;
+  }
+
+  if (returnComplete) {
+    return `${dateTimeDay}, ${dateTimeHour}:${dateTimeMinutes}`;
+  } else {
+    return `${dateTimeHour}:${dateTimeMinutes}`;
+  }
 }
 
 function updateCityWeatherInfo(response) {
@@ -67,12 +92,18 @@ function updateForecastInfo(response) {
     forecast = response.data.list[i];
     appForecast.innerHTML += `
       <div class="col-2">
-        <p class="next-hour">${forecast.dt * 1000}</p>
+        <p class="next-hour">${convertEpochToDateTime(
+          forecast.dt * 1000,
+          false
+        )}</p>
         <img 
           class="pred-icon"
           src="http://openweathermap.org/img/wn/${
             forecast.weather[0].icon
           }@2x.png" 
+          alt = "http://openweathermap.org/img/wn/${
+            forecast.weather[0].description
+          }@2x.png"
         />
         <p class="pred-temp">
           <span class="temp-min">
@@ -87,10 +118,26 @@ function updateForecastInfo(response) {
   }
 }
 
+function getTempUnit() {
+  let unitSelected = document.querySelector("a#convert-celsius");
+
+  if (unitSelected.classList.contains("selected")) {
+    return "metric";
+  } else {
+    return "imperial";
+  }
+}
+
+function cleanInputCity() {
+  let inputCity = document.querySelector("input#input-city");
+  inputCity.value = "";
+}
+
 function getCityWeatherInfoByGeoLocation(lat, lon, tempUnit) {
   let weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${tempUnit}&appid=${apiKey}`;
-  console.log(weatherApiUrl);
+  let predWeatherApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${tempUnit}&appid=${apiKey}`;
   axios.get(weatherApiUrl).then(updateCityWeatherInfo);
+  axios.get(predWeatherApiUrl).then(updateForecastInfo);
 }
 
 function getCityWeatherInfoByCityName(cityName, tempUnit) {
@@ -98,20 +145,21 @@ function getCityWeatherInfoByCityName(cityName, tempUnit) {
   let predWeatherApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=${tempUnit}&appid=${apiKey}`;
   axios.get(weatherApiUrl).then(updateCityWeatherInfo);
   axios.get(predWeatherApiUrl).then(updateForecastInfo);
+
+  cleanInputCity();
 }
 
 function setCityWeatherInfo(event) {
   event.preventDefault();
   let inputCity = document.querySelector("input#input-city");
-  console.log(inputCity);
-  getCityWeatherInfoByCityName(inputCity.value.toLowerCase(), "metric");
+  getCityWeatherInfoByCityName(inputCity.value.toLowerCase(), getTempUnit());
 }
 
 function getCurrentPosition(position) {
   getCityWeatherInfoByGeoLocation(
     position.coords.latitude,
     position.coords.longitude,
-    "metric"
+    getTempUnit()
   );
 }
 
@@ -217,11 +265,11 @@ getCityWeatherInfoByCityName("lisbon", "metric");
 let searchCityForm = document.querySelector("form#search-city-weather");
 searchCityForm.addEventListener("submit", setCityWeatherInfo);
 
+let searchLocationButton = document.querySelector("button#curr-location");
+searchLocationButton.addEventListener("click", setCurrentLocationWeatherInfo);
+
 let convertToCelsiusLink = document.querySelector("a#convert-celsius");
 convertToCelsiusLink.addEventListener("click", setTempToCelsius);
 
 let convertToFahrenheitLink = document.querySelector("a#convert-fahrenheit");
 convertToFahrenheitLink.addEventListener("click", setTempToFahrenheit);
-
-let searchLocationButton = document.querySelector("button#curr-location");
-searchLocationButton.addEventListener("click", setCurrentLocationWeatherInfo);
