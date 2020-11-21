@@ -19,10 +19,10 @@ hr {
 
 .weather-app {
   border: 2px solid #03c4a1;
-  padding: 30px;
+  padding: 30px 35px;
   margin: 0 auto;
   border-radius: 10px;
-  max-width: 650px;
+  max-width: 600px;
 }
 
 .app-header {
@@ -37,6 +37,7 @@ hr {
 
 .weather-unit {
   margin-top: 6px;
+  text-align: right;
 }
 
 .convert-unit {
@@ -64,9 +65,25 @@ hr {
   font-size: 12px;
 }
 
+.next-hour {
+  font-size: 12px;
+  text-align: center;
+  padding: 0;
+  margin-bottom: 0;
+}
+
 .pred-temp {
   font-size: 12px;
-  text-align: left;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.pred-icon {
+  margin: 0 auto;
+  display: block;
+  width: 55px;
+  height: 55px;
 }
 
 .selected {
@@ -90,7 +107,7 @@ hr {
 .author-rights {
   padding-top: 10px;
   margin: 0 auto;
-  max-width: 650px;
+  max-width: 600px;
   font-size: 11px;
   font-weight: lighter;
   color: grey;
@@ -99,8 +116,8 @@ hr {
 .location-button .tooltiptext {
   visibility: hidden;
   width: 115px;
-  background-color: grey;
-  opacity: 50%;
+  background-color: #03c4a1;
+  opacity: 40%;
   font-size: 10px;
   font-family: "Open Sans", sans-serif;
   color: #fff;
@@ -109,20 +126,20 @@ hr {
   padding: 5px 0;
   position: absolute;
   z-index: 1;
-  top: 92%;
-  left: 52%;
+  top: -2%;
+  left: 70%;
   margin-left: 22px;
 }
 
 .location-button .tooltiptext::after {
   content: "";
   position: absolute;
-  bottom: 100%;
-  left: 50%;
-  margin-left: -5px;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: transparent transparent grey transparent;
+  border-color: transparent #03c4a1 transparent transparent;
 }
 
 .location-button:hover .tooltiptext {
