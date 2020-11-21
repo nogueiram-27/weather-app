@@ -61,37 +61,52 @@
           </div>
         </div>
 
-        <div class="current-weather">
-          <div class="row">
-            <div class="col-4">
-              <h3 class="curr-city-weather">
-                <span class="city-searched"> &nbsp; </span>
-                <span class="curr-temp-main"
-                  ><span id="curr-temp"></span
-                  ><span id="curr-temp-unit">ºC</span></span
-                >
-              </h3>
-              <p class="today"></p>
-              <p class="curr-info">
-                <span id="curr-temp-min"></span>º/<span
-                  id="curr-temp-max"
-                ></span
-                >º
-              </p>
-              <p class="curr-info">
-                <i class="fas fa-tint"></i> <span id="curr-humidity"></span>%
-              </p>
-              <p class="curr-info">
-                <i class="fas fa-wind"></i>
-                <span id="curr-wind-speed"></span> km/h
-              </p>
-            </div>
-            <div class="col-4">
-              <img class="curr-icon" id="curr-weather-icon" />
-            </div>
+        <div class="row location-and-date">
+          <div class="col-12">
+            <h3 class="city-searched"></h3>
+            <p class="today"></p>
           </div>
         </div>
-        <br />
+
+        <div class="curr-weather">
+          <div class="row">
+            <div class="col-5">
+              <div class="clearfix">
+                <img class="curr-icon float-left" id="curr-weather-icon" />
+                <h3 class="curr-city-weather float-left">
+                  <strong class="temp-main" id="curr-temp"></strong>
+                  <span class="unit-main" id="curr-temp-unit">ºC</span>
+                </h3>
+              </div>
+              <p class="curr-desc" id="curr-weather-desc">Clear Sky</p>
+              <p class="last-upd">Last updated: <span id="last-upd"></span></p>
+            </div>
+
+            <div class="col-3">
+              <div class="curr-info">
+                <p>Feels like: <span id="feels-like">19</span>º</p>
+                <p>
+                  <span id="curr-temp-min"></span>º /
+                  <span id="curr-temp-max"></span>º
+                </p>
+                <p>
+                  <i class="fas fa-tint"></i>
+                  <span id="curr-humidity"></span>%
+                </p>
+                <p>
+                  <i class="fas fa-wind"></i>
+                  <span id="curr-wind-speed"></span> km/h
+                </p>
+                <p>
+                  <i class="fas fa-umbrella"></i>
+                  <span id="curr-precipitation"></span>mm
+                </p>
+              </div>
+            </div>
+
+            <div class="col-4"></div>
+          </div>
+        </div>
 
         <div class="row">
           <div class="line-col col-12">

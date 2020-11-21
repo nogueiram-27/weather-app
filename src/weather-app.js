@@ -45,20 +45,34 @@ function convertEpochToDateTime(epochTime, returnComplete) {
   }
 }
 
+function convertMetroPerSecondToKilometerPerHour(metroPerSecond) {
+  return Math.round(metroPerSecond * 3.6);
+}
+
 function updateCityWeatherInfo(response) {
   // get response weather data
   let cityName = response.data.name;
   let currentTemp = Math.round(response.data.main.temp);
   let currentMaxTemp = Math.round(response.data.main.temp_max);
   let curentMinTemp = Math.round(response.data.main.temp_min);
-  let currentWind = response.data.wind.speed;
+  let curentFeelsLike = Math.round(response.data.main.feels_like);
+  let currentWind = convertMetroPerSecondToKilometerPerHour(
+    response.data.wind.speed
+  );
   let currentHumidity = response.data.main.humidity;
+  let currentPrecipitation = response.data.rain;
+  if (typeof currentPrecipitation != "undefined") {
+    currentPrecipitation = response.data.rain["1h"];
+  } else {
+    currentPrecipitation = "0";
+  }
   let currentIcon = response.data.weather[0].icon;
   let currentDescription = response.data.weather[0].description;
+  let lastUpd = convertEpochToDateTime(response.data.dt * 1000);
 
   // update current weather info
   let appCity = document.querySelector(".city-searched");
-  appCity.innerHTML = cityName.toUpperCase() + "   ";
+  appCity.innerHTML = cityName;
 
   let appCurrTemp = document.querySelector("#curr-temp");
   appCurrTemp.innerHTML = currentTemp;
@@ -69,11 +83,17 @@ function updateCityWeatherInfo(response) {
   let appCurrTempMin = document.querySelector("#curr-temp-min");
   appCurrTempMin.innerHTML = curentMinTemp;
 
+  let appCurrFeelsLike = document.querySelector("#feels-like");
+  appCurrFeelsLike.innerHTML = curentFeelsLike;
+
   let appCurrWindSpeed = document.querySelector("#curr-wind-speed");
   appCurrWindSpeed.innerHTML = currentWind + " ";
 
   let appCurrHumidity = document.querySelector("#curr-humidity");
   appCurrHumidity.innerHTML = currentHumidity + " ";
+
+  let appCurrPrecipitation = document.querySelector("#curr-precipitation");
+  appCurrPrecipitation.innerHTML = currentPrecipitation + " ";
 
   let appCurrIcon = document.querySelector("#curr-weather-icon");
   appCurrIcon.setAttribute(
@@ -82,6 +102,12 @@ function updateCityWeatherInfo(response) {
   );
 
   appCurrIcon.setAttribute("alt", currentDescription);
+
+  let appCurrDesc = document.querySelector("#curr-weather-desc");
+  appCurrDesc.innerHTML = currentDescription;
+
+  let appLastUpd = document.querySelector("#last-upd");
+  appLastUpd.innerHTML = lastUpd;
 }
 
 function updateForecastInfo(response) {
@@ -201,6 +227,10 @@ function setTempToFahrenheit(event) {
     let currTempMaxValue = appCurrTempMax.innerText;
     appCurrTempMax.innerHTML = convertToFahrenheit(currTempMaxValue);
 
+    let appCurrFeelsLike = document.querySelector("#feels-like");
+    let currFeelsLikeValue = appCurrFeelsLike.innerText;
+    appCurrFeelsLike.innerHTML = convertToFahrenheit(currFeelsLikeValue);
+
     // update forecast temperature
     let appMinForecastTemp = document.querySelectorAll(".temp-min");
     appMinForecastTemp.forEach(function (item) {
@@ -241,6 +271,10 @@ function setTempToCelsius(event) {
     let appCurrTempMax = document.querySelector("#curr-temp-max");
     let currTempMaxValue = appCurrTempMax.innerText;
     appCurrTempMax.innerHTML = convertToCelsius(currTempMaxValue);
+
+    let appCurrFeelsLike = document.querySelector("#feels-like");
+    let currFeelsLikeValue = appCurrFeelsLike.innerText;
+    appCurrFeelsLike.innerHTML = convertToCelsius(currFeelsLikeValue);
 
     // update forecast temperature
     let appMinForecastTemp = document.querySelectorAll(".temp-min");
