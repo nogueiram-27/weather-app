@@ -247,12 +247,12 @@ function setWeatherAdvice(response) {
 
     "50d": {
       "activity-description": "Stay inside weather",
-      "fa-icon-html": '<i class="fas fa-snowman"></i>',
+      "fa-icon-html": '<i class="fas fa-house-user"></i>',
     },
 
     "50n": {
       "activity-description": "Stay inside weather",
-      "fa-icon-html": '<i class="fas fa-snowman"></i>',
+      "fa-icon-html": '<i class="fas fa-house-user"></i>',
     },
   };
 
@@ -266,14 +266,32 @@ function setWeatherAdvice(response) {
 function getCityWeatherInfoByGeoLocation(lat, lon, tempUnit) {
   let weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${tempUnit}&appid=${apiKey}`;
   let predWeatherApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${tempUnit}&appid=${apiKey}`;
-  axios.get(weatherApiUrl).then(updateCityWeatherInfo);
+  axios
+    .get(weatherApiUrl)
+    .then(updateCityWeatherInfo)
+    .catch(function (error) {
+      if (error.response) {
+        alert("Please enter a valid city!");
+      } else {
+        alert("Ups! Something went wrong, please try again.");
+      }
+    });
   axios.get(predWeatherApiUrl).then(updateForecastInfo);
 }
 
 function getCityWeatherInfoByCityName(cityName, tempUnit) {
   let weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=${tempUnit}&appid=${apiKey}`;
   let predWeatherApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=${tempUnit}&appid=${apiKey}`;
-  axios.get(weatherApiUrl).then(updateCityWeatherInfo);
+  axios
+    .get(weatherApiUrl)
+    .then(updateCityWeatherInfo)
+    .catch(function (error) {
+      if (error.response) {
+        alert("Please enter a valid city!");
+      } else {
+        alert("Ups! Something went wrong, please try again.");
+      }
+    });
   axios.get(predWeatherApiUrl).then(updateForecastInfo);
 
   cleanInputCity();
