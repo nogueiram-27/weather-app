@@ -108,6 +108,9 @@ function updateCityWeatherInfo(response) {
 
   let appLastUpd = document.querySelector("#last-upd");
   appLastUpd.innerHTML = lastUpd;
+
+  // set weather advice and icon
+  setWeatherAdvice(response);
 }
 
 function updateForecastInfo(response) {
@@ -161,6 +164,103 @@ function cleanInputCity() {
 
 function setWeatherAdvice(response) {
   let currWeatherIcon = response.data.weather[0].icon;
+  let adviceObject = {
+    "01d": {
+      "activity-description": "It's outside weather...maybe icecream?",
+      "fa-icon-html": '<i class="fas fa-ice-cream"></i>',
+    },
+
+    "01n": {
+      "activity-description": "Perfect for watch the stars!",
+      "fa-icon-html": '<i class="fas fa-star"></i>',
+    },
+
+    "02d": {
+      "activity-description": "It's outside weather...maybe a hot coffee?",
+      "fa-icon-html": '<i class="fas fa-mug-hot"></i>',
+    },
+
+    "02n": {
+      "activity-description": "Definitely dinnner with friends!",
+      "fa-icon-html": '<i class="fas fa-glass-cheers"></i>',
+    },
+
+    "03d": {
+      "activity-description": "Comeback summer!!!",
+      "fa-icon-html": '<i class="fas fa-sad-tear"></i>',
+    },
+
+    "03n": {
+      "activity-description": "Have we reached winter time yet?",
+      "fa-icon-html": '<i class="fas fa-flushed"></i>',
+    },
+
+    "04d": {
+      "activity-description": "Better return home to grab your umbrella.",
+      "fa-icon-html": '<i class="fas fa-umbrella"></i>',
+    },
+
+    "04n": {
+      "activity-description": "Ok, no more excuses to read that book!",
+      "fa-icon-html": '<i class="fas fa-book-reader"></i>',
+    },
+
+    "09d": {
+      "activity-description": "Just 5 more minutes in bed, please!",
+      "fa-icon-html": '<i class="fas fa-bed"></i>',
+    },
+
+    "09n": {
+      "activity-description": "Hot chocolate weather!",
+      "fa-icon-html": '<i class="fas fa-mug-hot"></i>',
+    },
+
+    "10d": {
+      "activity-description": "Love the smell of the rain!",
+      "fa-icon-html": '<i class="fas fa-heart"></i>',
+    },
+
+    "10n": {
+      "activity-description": "Ready for a cozy night!",
+      "fa-icon-html": '<i class="fas fa-couch"></i>',
+    },
+
+    "11d": {
+      "activity-description": "Is it ok to call sick?",
+      "fa-icon-html": '<i class="fas fa-temperature-high"></i>',
+    },
+
+    "11n": {
+      "activity-description": "Movie night!",
+      "fa-icon-html": '<i class="fas fa-film"></i>',
+    },
+
+    "13d": {
+      "activity-description": "Snowman time!",
+      "fa-icon-html": '<i class="fas fa-snowman"></i>',
+    },
+
+    "13n": {
+      "activity-description": "Snowman time!",
+      "fa-icon-html": '<i class="fas fa-snowman"></i>',
+    },
+
+    "50d": {
+      "activity-description": "Stay inside weather",
+      "fa-icon-html": '<i class="fas fa-snowman"></i>',
+    },
+
+    "50n": {
+      "activity-description": "Stay inside weather",
+      "fa-icon-html": '<i class="fas fa-snowman"></i>',
+    },
+  };
+
+  let currWeatherAdvice = document.querySelector(".weather-advice p");
+  currWeatherAdvice.innerHTML = `"${adviceObject[currWeatherIcon]["activity-description"]}"`;
+
+  let currIconAdvice = document.querySelector(".weather-advice-icon");
+  currIconAdvice.innerHTML = adviceObject[currWeatherIcon]["fa-icon-html"];
 }
 
 function getCityWeatherInfoByGeoLocation(lat, lon, tempUnit) {

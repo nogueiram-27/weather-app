@@ -228,3 +228,19 @@ hr {
   font-weight: lighter;
   color: grey;
 }
+
+/* style final-message */
+.final-message {
+  padding-top: 10px;
+  margin: 0 auto;
+  max-width: 600px;
+  font-size: 9px;
+  font-weight: lighter;
+  font-style: italic;
+  color: grey;
+}
+
+.fa-head-side-cough-slash {
+  color: grey;
+  font-size: 10px;
+}
